@@ -38,9 +38,122 @@ export default function HouseHold() {
             alert("Please select at least one household to print.");
             return;
         }
-        // ...existing print logic
-    };
 
+        // Get the selected households (with residents loaded in props)
+        const selectedHouseholds = households.filter(h =>
+            selected.includes(h.id)
+        );
+
+        const printContent = `
+    <html>
+<head>
+    <title>Household Profiling</title>
+    <style>
+        body { font-family: Arial, sans-serif; padding: 5px; }
+        h2 { text-align: center; margin-bottom: 15px; }
+
+        /* Header box styling */
+        .header-box {
+        display: grid;
+        grid-template-columns: 1fr 1fr 1fr; /* 3 columns */
+        border: 1px solid #333;
+    }
+    .header-box div {
+        border: 1px solid #1d1717ff;
+        padding: 8px;
+        font-size: 13px;
+        background: #fafafa;
+    }
+    .header-box div strong {
+        display: inline-block;
+        min-width: 160px;
+    }
+
+        /* Table styling */
+        table { width: 100%; border-collapse: collapse; font-size: 12px; }
+        th, td { border: 1px solid #333; padding: 6px; text-align: center; }
+        th { background: #f0f0f0; font-weight: bold; }
+    </style>
+</head>
+<body>
+    ${selectedHouseholds.map(h => `
+        <div class="section">
+            <h2>HOUSEHOLD PROFILING</h2>
+
+            <div class="header-box">
+                <div><strong>Date of Visit:</strong> ${h.date_of_visit ?? "-"}</div>
+                <div><strong>Type of Water Source:</strong> ${h.type_of_water_source ?? "-"}</div>
+                <div><strong>Head of household:</strong> ${h.head_of_household ?? ''}</div>
+                <div><strong>Type of Toilet Facility:</strong> ${h.type_of_facility ?? "-"}</div>
+                <div><strong>Purok/Barangay:</strong> ${h.purok?.name ?? h.purok ?? "-"}</div>
+                <div><strong>Backyard Gardening:</strong> ${h.back_yard_garden ?? "-"}</div>
+                <div><strong>Household No:</strong> ${h.house_hold_number ?? "-"}</div>
+                <div><strong>MRF:</strong> ${h.mrf ?? "-"}</div>
+                <div><strong>Total Members </strong> ${h.residents?.length ?? 0}</div>
+            </div>
+
+            <table>
+                <thead>
+           
+                    <tr>
+                        <th>Name of Member</th>
+                        <th>Relationship</th>
+                        <th>Date of Birth</th>
+                        <th>Age</th>
+                        <th>Sex</th>
+                        <th>Civil Status</th>
+                        <th>Educational Attainment</th>
+                        <th>Religion</th>
+                        <th>Ethnicity</th>
+                        <th>4Ps Y/N</th>
+                        <th>4Ps No.</th>
+                        <th>PhilHealth Category</th>
+                        <th>PhilHealth No.</th>
+                        <th>Medical History</th>
+                        <th>Family Planning Method Used</th>
+                        <th>Family Planning Status Date Started</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    ${h.residents && h.residents.length > 0
+                ? h.residents.map(r => `
+                            <tr>
+                                <td>${[r.first_name, r.middle_name, r.last_name, r.suffix].filter(Boolean).join(" ")}</td>
+                                <td>${r.relationship_to_head ?? "-"}</td>
+                                <td>${r.date_of_birth ?? "-"}</td>
+                                <td>${r.age ?? "-"}</td>
+                                <td>${r.sex ?? "-"}</td>
+                                <td>${r.civil_status ?? "-"}</td>
+                                <td>${r.educational_attainment ?? "-"}</td>
+                                <td>${r.religion ?? "-"}</td>
+                                <td>${r.ethnicity ?? "-"}</td>
+                                <td>${r.f4ps ?? "-"}</td>
+                                <td>${r.f4ps_number ?? "-"}</td>
+                                <td>${r.philhealth_category ?? "-"}</td>
+                                <td>${r.philhealth_number ?? "-"}</td>
+                                <td>${r.medical_history ?? "-"}</td>
+                                <td>${r.family_planning_method_used ?? "-"}</td>
+                                <td>${r.f_p_status_date_started ?? "-"}</td>
+                            </tr>
+                        `).join("")
+                : `<tr><td colspan="16">No residents found</td></tr>`
+            }
+                </tbody>
+            </table>
+        </div>
+    `).join("<div style='page-break-after: always;'></div>")}
+</body>
+</html>
+    `;
+
+        // Open print window
+        const printWindow = window.open("", "", "width=1200,height=800");
+        printWindow.document.write(printContent);
+        printWindow.document.close();
+        printWindow.focus();
+        printWindow.print();
+        printWindow.close();
+    };
     return (
         <AuthenticatedLayout
             header={

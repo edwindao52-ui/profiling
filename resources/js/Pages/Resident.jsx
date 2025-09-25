@@ -55,13 +55,6 @@ export default function Resident() {
         }
     };
 
-    const handlePrint = () => {
-        if (selected.length === 0) {
-            alert("Please select at least one resident to print.");
-            return;
-        }
-        window.open(`/residents/print?ids=${selected.join(",")}`, "_blank");
-    };
 
     // Helper function to format field names for display
     const formatFieldName = (key) => {
@@ -110,40 +103,7 @@ export default function Resident() {
             <div className="min-h-screen bg-gradient-to-br from-slate-50 via-violet-50 to-indigo-100 py-8 px-4">
                 <div className="mx-auto max-w-7xl space-y-6">
                     {/* Search & Bulk Actions */}
-                    <div className="bg-white rounded-xl shadow-lg p-6 border border-slate-200">
-                        <div className="flex flex-col sm:flex-row justify-between items-center gap-4">
-                            <div className="relative flex-1 max-w-md">
-                                <div className="absolute inset-y-0 left-0 pl-3 flex items-center pointer-events-none">
-                                    <svg className="h-5 w-5 text-gray-400" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                                        <path strokeLinecap="round" strokeLinejoin="round" strokeWidth="2" d="M21 21l-6-6m2-5a7 7 0 11-14 0 7 7 0 0114 0z" />
-                                    </svg>
-                                </div>
-                                <input
-                                    type="text"
-                                    value={search}
-                                    onChange={(e) => setSearch(e.target.value)}
-                                    placeholder="Search all fields..."
-                                    className="block w-full pl-10 pr-3 py-3 border border-slate-300 rounded-lg leading-5 bg-white placeholder-gray-500 focus:outline-none focus:placeholder-gray-400 focus:ring-2 focus:ring-violet-500 focus:border-violet-500 transition duration-200"
-                                />
-                            </div>
-                            {selected.length > 0 && (
-                                <div className="flex items-center space-x-3">
-                                    <span className="text-sm font-medium text-slate-600">
-                                        {selected.length} selected
-                                    </span>
-                                    <button
-                                        onClick={handlePrint}
-                                        className="inline-flex items-center px-6 py-3 bg-gradient-to-r from-emerald-600 to-teal-600 text-white font-medium rounded-lg hover:from-emerald-700 hover:to-teal-700 focus:outline-none focus:ring-2 focus:ring-emerald-500 focus:ring-offset-2 transition duration-200 shadow-lg"
-                                    >
-                                        <svg className="w-4 h-4 mr-2" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                                            <path strokeLinecap="round" strokeLinejoin="round" strokeWidth="2" d="M17 17h2a2 2 0 002-2v-4a2 2 0 00-2-2H5a2 2 0 00-2 2v4a2 2 0 002 2h2m2 4h6a2 2 0 002-2v-4a2 2 0 00-2-2H9a2 2 0 00-2 2v4a2 2 0 002 2zm8-12V5a2 2 0 00-2-2H9a2 2 0 00-2 2v4h10z" />
-                                        </svg>
-                                        Print Selected
-                                    </button>
-                                </div>
-                            )}
-                        </div>
-                    </div>
+
 
                     {/* Residents Table */}
                     <div className="bg-white rounded-xl shadow-lg border border-slate-200 overflow-hidden">
@@ -163,14 +123,6 @@ export default function Resident() {
                             <table className="w-full min-w-max">
                                 <thead>
                                     <tr className="bg-gradient-to-r from-slate-100 to-slate-200 border-b border-slate-300">
-                                        <th className="px-6 py-4 text-center">
-                                            <input
-                                                type="checkbox"
-                                                checked={selected.length === filteredResidents.length && filteredResidents.length > 0}
-                                                onChange={toggleSelectAll}
-                                                className="w-4 h-4 text-violet-600 bg-gray-100 border-gray-300 rounded focus:ring-violet-500 focus:ring-2"
-                                            />
-                                        </th>
                                         <th className="px-6 py-4 text-left text-xs font-semibold text-slate-700 uppercase tracking-wider">Full Name</th>
                                         <th className="px-6 py-4 text-left text-xs font-semibold text-slate-700 uppercase tracking-wider">Household #</th>
                                         <th className="px-6 py-4 text-left text-xs font-semibold text-slate-700 uppercase tracking-wider">Relationship</th>
@@ -187,14 +139,6 @@ export default function Resident() {
                                                 className={`hover:bg-gradient-to-r hover:from-violet-50 hover:to-indigo-50 transition-colors duration-150 ${selected.includes(resident.id) ? 'bg-gradient-to-r from-violet-50 to-indigo-50 border-l-4 border-violet-500' : ''
                                                     } ${index % 2 === 0 ? 'bg-white' : 'bg-slate-50'}`}
                                             >
-                                                <td className="px-6 py-4 text-center">
-                                                    <input
-                                                        type="checkbox"
-                                                        checked={selected.includes(resident.id)}
-                                                        onChange={() => toggleSelect(resident.id)}
-                                                        className="w-4 h-4 text-violet-600 bg-gray-100 border-gray-300 rounded focus:ring-violet-500 focus:ring-2"
-                                                    />
-                                                </td>
                                                 <td className="px-6 py-4">
                                                     <div className="flex items-center">
                                                         <div className="flex-shrink-0 h-10 w-10">

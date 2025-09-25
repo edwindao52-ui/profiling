@@ -18,7 +18,7 @@ class HouseHoldResource extends Resource
 {
     protected static ?string $model = HouseHold::class;
 
-    protected static string|BackedEnum|null $navigationIcon = Heroicon::OutlinedRectangleStack;
+    protected static string|BackedEnum|null $navigationIcon = Heroicon::OutlinedHomeModern;
 
     protected static ?string $recordTitleAttribute = 'households';
 

@@ -14,9 +14,6 @@ class HouseHoldsTable
     {
         return $table
             ->columns([
-                TextColumn::make('purok_id')
-                    ->numeric()
-                    ->sortable(),
                 TextColumn::make('purok')
                     ->searchable(),
                 TextColumn::make('house_hold_number')

@@ -65,7 +65,7 @@ class HouseHoldForm
                     ->required(),
 
                 Select::make('type_of_facility')
-                    ->label('Type of Facility')
+                    ->label('Type of toilet Facility')
                     ->options([
                         'water_sealed' => 'Water Sealed',
                         'open_pit' => 'Open Pit',
