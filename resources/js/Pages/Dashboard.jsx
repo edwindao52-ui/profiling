@@ -157,11 +157,9 @@ export default function Dashboard() {
                             <table className="w-full min-w-max">
                                 <thead>
                                     <tr className="bg-gradient-to-r from-slate-100 to-slate-200 border-b border-slate-300">
-                                        <th className="px-8 py-4 text-left text-xs font-semibold text-slate-700 uppercase tracking-wider">ID</th>
                                         <th className="px-8 py-4 text-left text-xs font-semibold text-slate-700 uppercase tracking-wider">User</th>
                                         <th className="px-8 py-4 text-left text-xs font-semibold text-slate-700 uppercase tracking-wider">Email</th>
                                         <th className="px-8 py-4 text-left text-xs font-semibold text-slate-700 uppercase tracking-wider">Role</th>
-                                        <th className="px-8 py-4 text-left text-xs font-semibold text-slate-700 uppercase tracking-wider">Status</th>
                                     </tr>
                                 </thead>
                                 <tbody className="bg-white divide-y divide-slate-200">
@@ -171,13 +169,7 @@ export default function Dashboard() {
                                             className={`hover:bg-gradient-to-r hover:from-emerald-50 hover:to-teal-50 transition-colors duration-150 ${index % 2 === 0 ? 'bg-white' : 'bg-slate-50'
                                                 }`}
                                         >
-                                            <td className="px-8 py-4">
-                                                <div className="flex items-center">
-                                                    <div className="w-8 h-8 bg-gradient-to-r from-slate-400 to-slate-500 rounded-lg flex items-center justify-center">
-                                                        <span className="text-xs font-bold text-white">#{user.id}</span>
-                                                    </div>
-                                                </div>
-                                            </td>
+
                                             <td className="px-8 py-4">
                                                 <div className="flex items-center">
                                                     <div className="flex-shrink-0 h-10 w-10">
@@ -202,12 +194,7 @@ export default function Dashboard() {
                                                     {user.role || 'staff'}
                                                 </span>
                                             </td>
-                                            <td className="px-8 py-4">
-                                                <span className="inline-flex items-center px-3 py-1 rounded-full text-xs font-medium bg-green-100 text-green-800">
-                                                    <div className="w-2 h-2 bg-green-500 rounded-full mr-2"></div>
-                                                    Active
-                                                </span>
-                                            </td>
+
                                         </tr>
                                     ))}
                                 </tbody>
