@@ -136,7 +136,7 @@ class ResidentForm
 
                 TextInput::make('f4ps_number')
                     ->label('4Ps Number')
-                    ->disabled(fn (callable $get) => $get('f4ps') !== 'yes')
+                    ->disabled(fn (callable $get) => $get('f4ps') !== 'yes')  
                     ->dehydrated(fn (callable $get) => $get('f4ps') === 'yes'),
 
                 TextInput::make('philhealth_category')
