@@ -140,19 +140,24 @@ class ResidentForm
                     ->dehydrated(fn (callable $get) => $get('f4ps') === 'yes'),
 
                 TextInput::make('philhealth_category')
-                    ->label('PhilHealth Category'),
+                    ->label('PhilHealth Category')
+                    ->required(),
 
                 TextInput::make('philhealth_number')
-                    ->label('PhilHealth Number'),
+                    ->label('PhilHealth Number')
+                    ->required(),
 
                 TextInput::make('medical_history')
-                    ->label('Medical History'),
+                    ->label('Medical History')
+                    ->required(),
 
                 TextInput::make('family_planning_method_used')
-                    ->label('Family Planning Method Used'),
+                    ->label('Family Planning Method Used')
+                    ->required(),
 
                 DatePicker::make('f_p_status_date_started')
-                    ->label('FP Status Date Started'),
+                    ->label('FP Status Date Started')
+                    ->required(),
             ]);
     }
 }
